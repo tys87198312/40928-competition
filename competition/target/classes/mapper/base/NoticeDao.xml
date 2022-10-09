@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dragee.modules.base.dao.NoticeDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.dragee.modules.base.entity.NoticeEntity" id="noticeMap">
+        <result property="id" column="id"/>
+        <result property="type" column="type"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="sent" column="sent"/>
+        <result property="createdBy" column="createdBy"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+        <result property="operator" column="operator"/>
+        <result property="sort" column="sort"/>
+    </resultMap>
+
+
+</mapper>

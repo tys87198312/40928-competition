@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dragee.modules.sys.dao.UserDao">
+
+    <select id="getLoginUser" resultType="com.dragee.modules.sys.entity.LoginUser">
+        select u.userId, u.username, u.password, u.name, u.status, u.roleName
+        from sys_user u where status = '1' and username = #{username}
+        <if test = 'password != null'>
+            and password = #{password}
+        </if>
+    </select>
+    <select id="getPerms" resultType="java.lang.String">
+        select distinct perms from v_getMenus where userId = #{userId} and perms is not null;
+    </select>
+    <select id="getRoles" resultType="java.lang.String">
+        select ur.role from sys_user u, sys_user_role ur
+        where u.userId = ur.userId
+        and u.userId = #{userId};
+    </select>
+
+
+    <update id="updatePassword" parameterType="com.dragee.modules.sys.vo.UpdatePasswordVo">
+        update sys_user set password = #{newPassword} where userId = #{userId}
+    </update>
+
+    <select id="getUserRole"  resultType="com.dragee.modules.sys.entity.UserEntity" >
+        select u.*,GROUP_CONCAT(DISTINCT(sur.roleName)) role
+        from sys_user u
+        left join sys_user_role sur on sur.userId=u.userId
+        where u.userid=#{id}
+        group by u.userId
+    </select>
+
+
+    <resultMap type="com.dragee.modules.sys.dto.UserDTO" id="UserTestMap">
+        <result property="userId" column="userId"/>
+        <result property="name" column="name"/>
+        <result property="username" column="username"/>
+        <result property="photo" column="photo"/>
+        <result property="area" column="area"/>
+        <result property="address" column="address"/>
+        <result property="roleNames" column="roleNames"/>
+    </resultMap>
+
+    <select id="UserInfo" parameterType="java.lang.String" resultMap="UserTestMap">
+        select t.userId,t.name,t.username,t.phone,t.area,t.address, case when roleName is null then '终端用户'  else roleName end roleNames from
+    (select GROUP_CONCAT(DISTINCT(ur.roleName)) roleName, u.*
+        from sys_user u
+        left join sys_user_role ur
+        on u.userId = ur.userId
+        where u.userId = #{userid}
+        group by u.name) t;
+  </select>
+
+</mapper>

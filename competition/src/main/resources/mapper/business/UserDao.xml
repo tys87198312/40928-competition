@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dragee.modules.business.dao.CompetitionDao">
+
+
+    <select id="listXS" resultType="com.dragee.modules.business.entity.CompetitionEntity">
+        select c.* from t_competition c inner join t_user_join u on c.id = u.competitionId
+            where u.userId = #{userId}
+            <if test='filter!=null'>
+                and (c.title like '%${filter}%' or c.startTime like '%${filter}%' or statusMean like '%${filter}%')
+            </if>
+
+    </select>
+    <select id="listPW" resultType="com.dragee.modules.business.entity.CompetitionEntity">
+        select c.* from t_competition c inner join t_judge_join u on c.id = u.competitionId
+        where u.userId = #{userId}
+        <if test='filter!=null'>
+            and (c.title like '%${filter}%' or c.startTime like '%${filter}%' or statusMean like '%${filter}%')
+        </if>
+    </select>
+</mapper>

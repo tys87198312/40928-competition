@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dragee.modules.sys.dao.RolesDao">
+
+    <insert id="insertUserRole">
+        insert into sys_user_role (role, roleName, userId, userName) values (#{role}, #{roleName}, #{value}, #{label});
+    </insert>
+    <insert id="insertMenuRole">
+        insert into sys_role_menu (role, roleName, menuId, menuName) values (#{role}, #{roleName}, #{value}, #{label});
+    </insert>
+    <insert id="insertFarmRole">
+        insert into fms_role_farm (role, roleName, farmCode, farmName) values (#{role}, #{roleName}, #{value}, #{label});
+    </insert>
+    <insert id="insertCarRole">
+        insert into fms_role_car (role, roleName, license, carName) values (#{role}, #{roleName}, #{value}, #{label});
+    </insert>
+    <delete id="deleteUserRole">
+        delete from sys_user_role where role = #{role}
+    </delete>
+    <delete id="deleteMenuRole">
+        delete from sys_role_menu where role = #{role}
+    </delete>
+    <delete id="deleteFarmRole">
+        delete from fms_role_farm where role = #{role}
+    </delete>
+    <delete id="deleteCarRole">
+        delete from fms_role_car where role = #{role}
+    </delete>
+
+    <select id="getUsers" resultType="com.dragee.modules.sys.dto.RoleUsersDTO">
+        select u.userId userId, u.name userName,
+               CASE
+                   when ur.role is null then 'false'
+                   else 'true'
+                   end
+                   selected
+        from sys_user u left join sys_user_role ur on u.userId = ur.userId and ur.role = #{enName} order by userName desc;
+    </select>
+    <select id="getFarms" resultType="com.dragee.modules.sys.dto.RoleFarmsDTO">
+        select
+            f.farmCode farmCode ,
+            f.name farmName,
+            case when rf.role is null then 'false'
+            else 'true'
+            end
+            selected
+        from fms_farm f
+        left join fms_role_farm rf
+        on f.farmCode = rf.farmCode
+        and rf.role = #{enName} order by name desc;
+    </select>
+    <select id="getCarsByFarmAndRole" resultType="com.dragee.modules.sys.dto.RoleCarsDTO">
+        select
+            c.license,
+            c.name carName,
+            case when rc.role is null then 'false'
+            else 'true'
+            end
+            selected
+        from (select * from fms_car where farmCode = #{farmCode}) c
+        left join fms_role_car rc
+        on c.license = rc.license
+        and rc.role = #{enName} order by name desc;
+    </select>
+</mapper>

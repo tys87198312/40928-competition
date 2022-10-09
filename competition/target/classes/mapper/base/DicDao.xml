@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dragee.modules.base.dao.DicDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.dragee.modules.base.entity.DicEntity" id="dicMap">
+        <result property="id" column="id"/>
+        <result property="value" column="value"/>
+        <result property="text" column="text"/>
+        <result property="enName" column="enName"/>
+        <result property="chName" column="chName"/>
+        <result property="sort" column="sort"/>
+    </resultMap>
+
+    <select id="findDic" resultType="com.dragee.modules.base.entity.DicEntity">
+        select * from base_dic where enName = #{enName} and value is not null ;
+    </select>
+
+</mapper>

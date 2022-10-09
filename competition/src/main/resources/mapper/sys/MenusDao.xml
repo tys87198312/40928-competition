@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dragee.modules.sys.dao.MenusDao">
+
+
+    <select id="getTopMenus" resultType="com.dragee.modules.sys.entity.MenusEntity">
+        select * from v_getMenus where type = '0'
+        <if test = 'userId != null'>
+            AND userId = #{userId}
+        </if>
+        order by sort, menuName;
+    </select>
+
+    <select id="getSonMenus" resultType="com.dragee.modules.sys.entity.MenusEntity">
+        select * from v_getMenus where type = '1'
+        <if test = 'userId != null'>
+            AND userId = #{userId}
+        </if>
+        <if test = 'parentId != null'>
+            AND parentId = #{parentId}
+        </if>
+        order by sort, menuName;
+    </select>
+
+
+    <select id="getTopMenusByRole" resultType="com.dragee.modules.sys.entity.MenuTree">
+        select m.menuId, m.menuName name, m.url, m.icon from sys_menus m, sys_role_menu rm
+        where m.menuId = rm.menuId and rm.role = #{roleEnName} and type = 0 order by sort, menuName;
+    </select>
+    <select id="getMenusNext" resultType="com.dragee.modules.sys.entity.MenuTree">
+        select m.menuId, m.menuName name, m.url, m.icon from sys_menus m, sys_role_menu rm
+        where m.menuId = rm.menuId and parentId = #{parentId} order by sort, menuName;
+    </select>
+    <select id="getTopMenusByRoleBase" resultType="com.dragee.modules.sys.dto.RoleMenusDTO">
+        select
+            m.menuId ,
+            m.menuName,
+            case when rm.role is null then 'false'
+                else 'true'
+                end
+                selected
+        from (select * from sys_menus where type = '0') m
+        left join sys_role_menu rm
+        on m.menuId = rm.menuId
+        and rm.role = #{roleEnName} order by sort, menuName;
+    </select>
+
+    <select id="getMenusNextBase" resultType="com.dragee.modules.sys.dto.RoleMenusDTO">
+        select
+            m.menuId,
+            m.menuName,
+            case when rm.role is null then 'false'
+                else 'true'
+                end
+                selected
+        from (select * from sys_menus where parentId = #{parentId}) m
+        left join sys_role_menu rm
+        on m.menuId = rm.menuId
+        and rm.role = #{roleEnName} order by sort, menuName;
+    </select>
+    <select id="getTops" resultType="com.dragee.modules.sys.entity.MenusEntity">
+        select * from sys_menus where type = 0  order by sort, menuName;
+    </select>
+
+
+
+</mapper>

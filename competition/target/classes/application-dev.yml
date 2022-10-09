@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      mysql:
+        enable: true
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/competition?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+        username: root
+        password: root
+      postgis:
+        enable: false
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://121.36.1.51:5006/fms_db
+        username: postgres
+        password: example
+  redis:
+    host: 192.168.0.85
+    port: 6379
+    database: 0
+    password: webull
+webull:
+  mapUploadPath: /D://upload
+  configCenterAddr: https://config.agro-robot.net/api
+  accessKeyId: LTAIUeRkwSM8DD9H
+  accessKeySecret: wsBmAuG2cbyyBKsO17HwB2YrQQlnX5
+  signName: 悟牛智能
+  mqtt:
+    # url: tcp://192.168.0.85:1883
+    url: tcp://webull.agro-robot.net:4006
+    username: guest
+    password: guest
+    clientId: paltfrom-${random.int}
+    completionTimeout: 30
+    keepAliveInterval: 60
+  swagger:
+    enable: true

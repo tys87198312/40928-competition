@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "spring.datasource.druid.mysql",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.dragee.config.dynamicDataSource.DynamicDataSourceConfig",
+      "sourceMethod": "oneDataSource()"
+    },
+    {
+      "name": "spring.datasource.druid.postgis",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.dragee.config.dynamicDataSource.DynamicDataSourceConfig",
+      "sourceMethod": "twoDataSource()"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
