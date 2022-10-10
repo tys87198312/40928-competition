@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-wcc-server/cloud-control/target/
+**/target/
 # Log file
 *.log
 logs/

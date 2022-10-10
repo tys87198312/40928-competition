@@ -5,7 +5,7 @@ server:
     context-path: /api
 spring:
   application:
-    name: business
+    name: back
   servlet:
     multipart:
       max-file-size: 100MB

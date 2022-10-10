@@ -1,6 +1,6 @@
 FROM java:8
 EXPOSE 8080
-MAINTAINER webull
+MAINTAINER dragee
 VOLUME /tmp
-COPY target/cloudControl.jar  /app.jar
+COPY target/back.jar  /app.jar
 ENTRYPOINT ["java","-Xms1024m","-Xmx1024m","-jar","app.jar","-c"]
