@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+dist
+Dcokerfiles
+remote-profile
+.quasar/
+.vscode/
+.editorconfig
