@@ -11,4 +11,4 @@ fi
   echo "[1] 构建"
   docker build -t "${image}" .
   echo "[2] 推送"
-  docker push "${image}"
+  docker push "${image}"false
