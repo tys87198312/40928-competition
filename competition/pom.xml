@@ -271,7 +271,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.2.RELEASE</version>
                 <configuration>
-                    <mainClass>com.dragee.BusinessApplication</mainClass>
+                    <mainClass>com.dragee.MyApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
