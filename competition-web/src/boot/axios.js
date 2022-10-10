@@ -8,7 +8,7 @@ import axios from 'axios'
 // "export default () => {}" function below (which runs individually
 // for each client)
 //const api = axios.create({ baseURL: 'http://localhost:8080/api/' })
-const api = axios.create({ baseURL: 'http://back:8080/api/' })
+const api = axios.create({ baseURL: 'http://114.116.85.172:3910/api/' })
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
 

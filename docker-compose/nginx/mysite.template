@@ -11,18 +11,9 @@ upstream back {
 }
 
 server {
-    listen 0.0.0.0:80;
-    charset utf-8;
-    
-    return 302 https://$host:${NGINX_HOST_PORT_HTTPS}$request_uri;
-}
+    listen              80;
+    listen              [::]:80;
 
-server {
-    listen              443 ssl;
-    ssl_certificate     cert/site.pem;
-    ssl_certificate_key cert/site.key;
-    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers         HIGH:!aNULL:!MD5;
 
      location / {
           resolver 127.0.0.1;

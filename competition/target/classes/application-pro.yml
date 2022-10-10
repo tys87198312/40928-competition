@@ -5,34 +5,33 @@ spring:
       mysql:
         enable: true
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://121.36.1.51:5004/fms_db?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+        url: jdbc:mysql://114.116.85.172:4002/competition?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
         username: root
-        password: example
+        password: root
       postgis:
-        enable: true
-        driver-class-name: org.postgresql.Driver
+        enable: false
+        driver-class-name: org.postgresql.D3river
         url: jdbc:postgresql://121.36.1.51:5006/fms_db
         username: postgres
         password: example
   redis:
-    host: 121.36.1.51
-    port: 5005
+    host: 192.168.0.85
+    port: 6379
     database: 0
     password: webull
-
 webull:
-  mapUploadPath: /tmp/upload
+  mapUploadPath: /D://upload
   configCenterAddr: https://config.agro-robot.net/api
   accessKeyId: LTAIUeRkwSM8DD9H
   accessKeySecret: wsBmAuG2cbyyBKsO17HwB2YrQQlnX5
   signName: 悟牛智能
   mqtt:
     # url: tcp://192.168.0.85:1883
-    url: tcp://121.36.1.51:4006
+    url: tcp://webull.agro-robot.net:4006
     username: guest
     password: guest
     clientId: paltfrom-${random.int}
-    completionTimeout: 3000
-    keepAliveInterval: 2000
+    completionTimeout: 30
+    keepAliveInterval: 60
   swagger:
     enable: true
